@@ -1,22 +1,16 @@
 <template>
   <div id="top">
-    <img src="@/assets/img/top.png" alt="" />
     <div class="top_nav">
       <div class="container flex">
-        <span> 鲜花礼品网:国内领先鲜花网品牌 </span>
-        <div class="denglu">
-          你好，
-          <router-link to="/login">请登录</router-link>
-          &emsp;
-          <router-link to="/logon">注册</router-link>
-        </div>
+        <span class="welcome"> 鲜花礼品网 欢迎您 </span>
+        <router-link to="/" class="order">首页</router-link>
+        <router-link to="/order" class="order">我的订单</router-link>
+        <span>鲜花网 为您提供优质购物体验</span>
       </div>
     </div>
     <div class="container">
       <div class="logo_line flex">
-        <div class="logo">
-          <img src="@/assets/img/105.jpeg" alt="" />
-        </div>
+        <router-link to="/" class="logo"></router-link>
         <div class="home_input">
           <input type="text" />
           <button class="search_button">搜索</button>
@@ -25,23 +19,6 @@
           <i class="el-icon-shopping-cart-full"></i>
           <span>购物车</span>
         </div>
-      </div>
-    </div>
-    <div class="nav">
-      <div class="container">
-        <nav>
-          <ul>
-            <li>
-              <router-link to="/">首页</router-link>
-            </li>
-            <li>
-              <router-link to="/">新品抢先</router-link>
-            </li>
-            <li>
-              <router-link to="/">年货节专场</router-link>
-            </li>
-          </ul>
-        </nav>
       </div>
     </div>
   </div>
@@ -59,24 +36,36 @@ export default {
 </script>
 
 <style scoped>
+.top_nav {
+  height: 40px;
+  background-color: #fd808e;
+  transform: translateY(-4px);
+  line-height: 40px;
+  font-size: 14px;
+  color: white;
+}
+.login,
+.register {
+  color: rgba(0, 110, 255, 0.501);
+}
+.order {
+  color: white;
+}
 .logo {
   height: 100%;
+  width: 100px;
+  background: url("@/assets/img/logo.png") no-repeat;
 }
-
-.logo img {
-  height: 100%;
-}
-
 .logo_line {
-  height: 200px;
+  height: 50px;
+  margin: 30px 0;
 }
 
 .home_input {
   position: relative;
   width: 600px;
-  margin-top: 80px;
   height: 40px;
-  border: 1px solid #ff481e;
+  border: 1px solid #fd808e;
   border-radius: 8px;
 }
 
@@ -105,7 +94,7 @@ export default {
   top: 0;
   width: 20%;
   height: 100%;
-  background-color: #ff481e;
+  background-color: #fd808e;
   color: white;
   text-align: center;
   outline: none;
@@ -118,10 +107,9 @@ export default {
 .gouwu {
   cursor: pointer;
   height: 40px;
-  margin-top: 80px;
   font-size: 20px;
   line-height: 42px;
-  background-color: #ff481e;
+  background-color: #fd808e;
   padding: 0 32px;
   color: white;
   border-radius: 4px;
@@ -135,44 +123,6 @@ export default {
 }
 
 .gouwu:hover {
-  background-color: #ef5634;
-}
-
-.nav ul {
-  display: flex;
-}
-
-.nav ul li {
-  cursor: pointer;
-  list-style: none;
-  background-color: #ef5634;
-  transition: all 0.3s;
-}
-
-.nav ul li:hover {
-  background-color: #ec7358;
-}
-
-.nav ul li a {
-  padding: 0 30px;
-  line-height: 50px;
-  display: inline-block;
-  height: 50px;
-  text-decoration: none;
-  color: rgb(248, 248, 248);
-  transition: all 0.3s;
-}
-
-.nav {
-  background-color: #ef5634;
-}
-
-.top_nav {
-  height: 30px;
-  background-color: #e3e3e3;
-  transform: translateY(-4px);
-  line-height: 30px;
-  font-size: 12px;
-  color: rgb(148, 148, 148);
+  background-color: #fd808e;
 }
 </style>

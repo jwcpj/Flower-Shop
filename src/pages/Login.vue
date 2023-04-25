@@ -8,18 +8,21 @@
           <router-link to="logon"><b>还没有账号？</b>30秒注册</router-link>
         </p>
         <dl>
-          <dt>用户名/邮箱/手机号</dt>
+          <dt>用户名</dt>
           <dd>
-            <input type="text" />
+            <input type="text" v-model="userInfo.username" value="username" />
           </dd>
           <dt>密码</dt>
           <dd>
-            <input type="password" id="pwd-type" />
-            <span id="pwd-icon" class="iconfont icon-yincangmima"></span>
+            <input
+              type="password"
+              id="pwd-type"
+              v-model="userInfo.password"
+              value="password"
+            />
           </dd>
         </dl>
-        <button type="submit">登 录</button>
-        <div class="pw"><a href="#">忘记密码</a></div>
+        <button type="submit" @click="submit()">登 录</button>
       </div>
     </div>
     <Footer></Footer>
@@ -29,40 +32,68 @@
 <script>
 import HomeHeader from "@/components/Front/HomeHeader.vue";
 import Footer from "@/components/Front/Footer.vue";
-
+import { loginUser } from "@/api";
 export default {
   name: "Login",
   components: {
     HomeHeader,
     Footer,
   },
+  data() {
+    return {
+      userInfo: {
+        username: "",
+        password: "",
+      },
+    };
+  },
+  methods: {
+    async submit() {
+      let res = await loginUser(this.userInfo);
+      let user = res.code;
+      console.log(user);
+      if (user == "10000") {
+        localStorage.setItem("user", JSON.stringify(user));
+      }
+      if (res.code == "10000") {
+        this.$router.push({
+          name: "home",
+          // params: {
+          //   username: this.username,
+          //   password: this.password,
+          // },
+        });
+      } else {
+        alert(res.msg + "请重新登录！");
+      }
+    },
+  },
 };
 </script>
 
 <style scoped>
 .main {
-  width: 100%;
-  height: 30vw;
+  max-width: 100%;
+  height: auto;
   border: 1px solid #ccc;
   border-left: 0;
   border-right: 0;
 }
 .login {
   width: 100%;
-  height: 25vw;
   margin: 42px auto;
   display: flex;
   justify-content: space-between;
-  background-image: url(@/assets/img/banner2.jpg);
+  background-image: url(@/assets/img/banner_elder.png);
 }
 .login .login_content {
   margin-top: 3vw;
   margin-left: 10vw;
   background-color: #fff;
   padding: 36px;
-  height: 18vw;
   box-sizing: border-box;
   border: 1px solid #ddd;
+  border-radius: 5%;
   box-shadow: 0 0 15px rgba(204, 204, 204, 0.3);
 }
 .login .login_content p {
@@ -70,7 +101,7 @@ export default {
   justify-content: space-between;
 }
 .login .login_content p span {
-  color: #ff7b57;
+  color: rgb(241, 11, 61);
 }
 .login .login_content dl dt {
   padding: 15px 0 8px;
@@ -101,7 +132,7 @@ export default {
   width: 100%;
   height: 34px;
   margin: 15px 0;
-  background: #ff7b57;
+  background: #fd808e;
   text-align: center;
   color: #fff;
   font-size: 15px;

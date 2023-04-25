@@ -203,7 +203,7 @@
 <script>
 import HomeHeader from "@/components/Front/HomeHeader.vue";
 import Footer from "@/components/Front/Footer.vue";
-
+import pubsub from "pubsub-js";
 import img1 from "@/assets/img/1.jpeg";
 import img2 from "@/assets/img/19.jpeg";
 
@@ -307,9 +307,13 @@ export default {
       let _this = this;
       _this.getList();
     },
-
+mounted(){
+this.pubId = pubsub.subscribe('getList',this.getList)
+console.log(this.getList);
+},
     // 获取购物车列表
-    getList() {
+    getList(msg,data) {
+      console.log(msg,data);
       let _this = this;
       _this.cartList = [
         {

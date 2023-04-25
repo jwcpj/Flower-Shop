@@ -1,6 +1,6 @@
 <template>
   <div class="footer">
-    <div class="f-top">
+    <div class="f-top flex">
       <dl>
         <dt><img src="@/assets/img/f1.jpg" alt="" /></dt>
         <dd>
@@ -37,54 +37,6 @@
         </dd>
       </dl>
     </div>
-    <div class="f-mid">
-      <div class="div-left">
-        <ul>
-          <li>
-            <h6>分期指南</h6>
-          </li>
-          <li><a href="#">分期条件</a></li>
-          <li><a href="#">需要材料</a></li>
-          <li><a href="#">分期步骤</a></li>
-          <li><a href="#">分期问题</a></li>
-        </ul>
-        <ul>
-          <li>
-            <h6>还款指南</h6>
-          </li>
-          <li><a href="#">还款流程</a></li>
-          <li><a href="#">提前还款</a></li>
-          <li><a href="#">出现逾期</a></li>
-        </ul>
-        <ul>
-          <li>
-            <h6>售后保障</h6>
-          </li>
-          <li><a href="#">正品保障</a></li>
-          <li><a href="#">售后服务</a></li>
-          <li><a href="#">退款政策</a></li>
-        </ul>
-        <ul>
-          <li>
-            <h6>账户服务</h6>
-          </li>
-          <li><a href="#">关于账户</a></li>
-          <li><a href="#">关于订单</a></li>
-          <li><a href="#">常见问题</a></li>
-        </ul>
-        <ul>
-          <li>
-            <h6>鲜花来了</h6>
-          </li>
-          <li><a href="#">有关发货</a></li>
-          <li><a href="#">有关物流</a></li>
-        </ul>
-      </div>
-      <div class="div-right">
-        <p>联系微信</p>
-
-      </div>
-    </div>
     <div class="f-bom">
       <a href="#">关于鲜花网</a> | <a href="#">联系我们</a> |
       <a href="#">加入我们</a> | <a href="#">媒体报道</a>
@@ -103,7 +55,7 @@ export default {
   width: 100%;
   height: auto;
   overflow: hidden;
-  border-top: 1px solid rgb(105, 105, 105);
+  border-top: 1px solid #fd808e;
 }
 .footer .f-top {
   width: 960px;
@@ -111,7 +63,7 @@ export default {
   overflow: hidden;
   margin: 35px auto;
   display: flex;
-  justify-content: space-between;
+  justify-content: space-around;
 }
 .footer .f-top dl {
   display: flex;
@@ -121,49 +73,17 @@ export default {
   margin-right: 12px;
 }
 .footer .f-top dl h6 {
-  color: #000;
+  color: rgb(241, 11, 61);
   font-size: 15px;
 }
-.footer .f-mid {
-  width: 1050px;
-  height: auto;
-  overflow: hidden;
-  margin: 0 auto;
-  display: flex;
-}
-.footer .f-mid .div-left {
-  flex: 1;
-  display: flex;
-}
-.footer .f-mid .div-left ul {
-  flex: 1;
-  min-height: 150px;
-  border-right: 1px solid #ccc;
-}
-.footer .f-mid .div-left ul li {
-  list-style: none;
-  padding: 0 45px;
-  line-height: 25px;
-  width: 100%;
-  box-sizing: border-box;
-}
-.footer .f-mid .div-left ul li h6 {
-  font-size: 15px;
-  color: #000;
-  padding-bottom: 5px;
-}
-.footer .f-mid .div-right {
-  flex: 0 0 175px;
-  text-align: center;
-}
-.footer .f-mid .div-right p {
-  padding-bottom: 10px;
+.footer .f-top p {
+  color: rgb(241, 11, 61);
 }
 .footer .f-bom {
   width: 100%;
   height: 34px;
   line-height: 34px;
-  background: #ef5634;
+  background: #fd808e;
   text-align: center;
   color: #fff;
 }

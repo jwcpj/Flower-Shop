@@ -8,18 +8,21 @@
           ><router-link to="login"><b>已有账号？</b>快速登录</router-link>
         </p>
         <dl>
-          <dt>用户名/邮箱/手机号</dt>
+          <dt>用户名</dt>
           <dd>
-            <input type="text" />
+            <input type="text" v-model="userInfo.username" value="username" />
           </dd>
           <dt>密码</dt>
           <dd>
-            <input type="password" id="pwd-type" />
-            <span id="pwd-icon" class="iconfont icon-yincangmima"></span>
+            <input
+              type="password"
+              id="pwd-type"
+              v-model="userInfo.password"
+              value="password"
+            />
           </dd>
         </dl>
-        <button type="submit">注 册</button>
-        <div class="pw"><a href="#">忘记密码</a></div>
+        <button type="submit" @click="submit()">注 册</button>
       </div>
     </div>
     <Footer></Footer>
@@ -29,12 +32,35 @@
 <script>
 import HomeHeader from "@/components/Front/HomeHeader.vue";
 import Footer from "@/components/Front/Footer.vue";
+import { registUser } from "@/api";
 
 export default {
-  name: "Login",
+  name: "Logon",
   components: {
     HomeHeader,
     Footer,
+  },
+  data() {
+    return {
+      userInfo: {
+        username: "",
+        password: "",
+      },
+    };
+  },
+  methods: {
+    async submit() {
+      let res = await registUser(this.userInfo);
+      if (res.code == "10000") {
+        this.$router.push({
+          name: "login",
+          params: {
+            username: this.username,
+            password: this.password,
+          },
+        });
+      }
+    },
   },
 };
 </script>
@@ -42,27 +68,25 @@ export default {
 <style scoped>
 .main {
   width: 100%;
-  height: 30vw;
   border: 1px solid #ccc;
   border-left: 0;
   border-right: 0;
 }
 .login {
   width: 100%;
-  height: 25vw;
   margin: 42px auto;
   display: flex;
   justify-content: space-between;
-  background-image: url(@/assets/img/banner2.jpg);
+  background-image: url(@/assets/img/banner_lover.png);
 }
 .login .login_content {
   margin-top: 3vw;
   margin-left: 10vw;
   background-color: #fff;
   padding: 36px;
-  height: 18vw;
   box-sizing: border-box;
   border: 1px solid #ddd;
+  border-radius: 5%;
   box-shadow: 0 0 15px rgba(204, 204, 204, 0.3);
 }
 .login .login_content p {
@@ -70,7 +94,7 @@ export default {
   justify-content: space-between;
 }
 .login .login_content p span {
-  color: #ff7b57;
+  color: rgb(241, 11, 61);
 }
 .login .login_content dl dt {
   padding: 15px 0 8px;
@@ -101,7 +125,7 @@ export default {
   width: 100%;
   height: 34px;
   margin: 15px 0;
-  background: #ff7b57;
+  background: #fd808e;
   text-align: center;
   color: #fff;
   font-size: 15px;
@@ -110,8 +134,8 @@ export default {
 }
 
 .login_content a {
-    font-size: 12px;
-    margin-left: 10px;
-    line-height: 22px;
+  font-size: 12px;
+  margin-left: 10px;
+  line-height: 22px;
 }
 </style>
