@@ -77,7 +77,7 @@
                   <div class="card_title2">￥199</div>
                   <div class="card_text">已售 428 件</div>
                 </div>
-                <div class="card">
+                <div class="card" @click="toTarget1">
                   <img src="@/assets/image/玫瑰2.jpeg" alt="" />
                   <div class="card_title">爱情.浪漫红玫瑰</div>
                   <div class="badge">情人节定制款</div>
@@ -287,6 +287,34 @@ import meigui1_1 from "@/assets/image/玫瑰1.jpeg"
 import meigui1_2 from "@/assets/image/玫瑰1.1.jpeg"
 import meigui1_3 from "@/assets/image/玫瑰1.2.jpeg"
 import meigui1_4 from "@/assets/image/玫瑰1.3.jpeg"
+import meigui2_1 from "@/assets/image/玫瑰2.jpeg"
+import meigui2_2 from "@/assets/image/玫瑰2.1.jpeg"
+import meigui2_3 from "@/assets/image/玫瑰2.2.jpeg"
+import meigui2_4 from "@/assets/image/玫瑰2.3.jpeg"
+import meigui3_1 from "@/assets/image/玫瑰3.jpeg"
+import meigui3_2 from "@/assets/image/玫瑰3.1.jpeg"
+import meigui3_3 from "@/assets/image/玫瑰3.2.jpeg"
+import meigui3_4 from "@/assets/image/玫瑰3.3.jpeg"
+import meigui4_1 from "@/assets/image/玫瑰4.jpeg"
+import meigui4_2 from "@/assets/image/玫瑰4.1.jpeg"
+import meigui4_3 from "@/assets/image/玫瑰4.2.jpeg"
+import meigui4_4 from "@/assets/image/玫瑰4.3.jpeg"
+import meigui5_1 from "@/assets/image/玫瑰5.jpeg"
+import meigui5_2 from "@/assets/image/玫瑰5.1.jpeg"
+import meigui5_3 from "@/assets/image/玫瑰5.2.jpeg"
+import meigui5_4 from "@/assets/image/玫瑰5.3.jpeg"
+import meigui6_1 from "@/assets/image/玫瑰6.jpeg"
+import meigui6_2 from "@/assets/image/玫瑰6.1.jpeg"
+import meigui6_3 from "@/assets/image/玫瑰6.2.jpeg"
+import meigui6_4 from "@/assets/image/玫瑰6.3.jpeg"
+import meigui7_1 from "@/assets/image/玫瑰7.jpeg"
+import meigui7_2 from "@/assets/image/玫瑰7.1.jpeg"
+import meigui7_3 from "@/assets/image/玫瑰7.2.jpeg"
+import meigui7_4 from "@/assets/image/玫瑰7.3.jpeg"
+import meigui8_1 from "@/assets/image/玫瑰8.jpeg"
+import meigui8_2 from "@/assets/image/玫瑰8.1.jpeg"
+import meigui8_3 from "@/assets/image/玫瑰8.2.jpeg"
+import meigui8_4 from "@/assets/image/玫瑰8.3.jpeg"
 export default {
   data() {
     return {
@@ -337,6 +365,82 @@ export default {
           ],
         },
       ],
+      details: [
+        {
+          m1: [
+            {
+              name: '你是唯一',
+              summary: '[11枝热销 一心一意的爱] 卡罗拉红玫瑰11枝',
+              price: 198,
+              originPrice: 216,
+              sale: 1436,
+              hy: '人间蹉跎，你是唯一值得',
+              material: '卡罗拉红玫瑰11枝、白色满天星3枝、尤加利10枝',
+              Package: '红/金色鎏金纸5张、白色雪梨纸2张、酒红色罗纹烫金丝带2米'
+            }
+          ],
+          m2: [
+            {
+              name: '深情挚爱/33枝',
+              summary: '[2023热卖33枝红玫瑰] 卡罗拉玫瑰33枝',
+              price: 329,
+              originPrice: 459,
+              sale: 9701,
+              hy: '许你三生三世，可伴朝朝暮暮',
+              material: '卡罗拉玫瑰33枝',
+              Package: '红色风华纸3大张、 白色小号英文插画纸（You are my love）4张、白色雪梨纸1张、酒红色罗纹烫金丝带2米'
+            }
+          ],
+          m3: [
+            {
+              name: '我心有你/限定款',
+              summary: '[新品抱抱桶] 红玫瑰13枝、白玫瑰26枝',
+              price: 429,
+              originPrice: 558,
+              sale: 144,
+              hy: '天上有云，林间有雾，我心有你',
+              material: '红玫瑰卡罗拉13枝搭配成心形；白玫瑰26枝围绕',
+              Package: '贝斯特银色抱抱桶大号（20cm直径），白色烫金丝带蝴蝶结，鱼尾纱丝带蝴蝶结'
+            },
+          ],
+          m4: [
+            {
+              name: '爱你/红玫瑰香水百合',
+              summary: '[百合花开，幸福自来] 卡罗拉红玫瑰11枝、白色香水百合2枝、尤加利叶10枝',
+              price: 216,
+              originPrice: 298,
+              sale: 1371,
+              hy: '永远爱你，始终如一',
+              material: '卡罗拉红玫瑰11枝、白色香水百合2枝、尤加利叶10枝',
+              Package: '黑色雾面纸7张、白色雪梨纸2张、酒红色罗纹烫金丝带2米'
+            },
+          ],
+          m5: [
+            {
+              name: '韩式系列/绽放',
+              summary: '[暖阳系列新品] 向日葵+香槟玫瑰+多头玫瑰',
+              price: 190,
+              originPrice: 359,
+              sale: 1571,
+              hy: '元气满满，永远向着太阳',
+              material: '香槟玫瑰3枝、向日葵3枝、橙色多头玫瑰2枝、尤加利叶5枝',
+              Package: '蜜瓜/奶茶色欧雅纸4张、香槟色雪梨纸2张、浅粉色罗纹玫瑰金丝带2米'
+            },
+          ],
+          m6: [
+            {
+              name: '星辰大海/52枝',
+              summary: '[密西根碎冰蓝，清新而高雅] 碎冰蓝玫瑰52枝',
+              price: 499,
+              originPrice: 599,
+              sale: 2475,
+              hy: '送给你的希望是星辰和大海',
+              material: ' 52枝碎冰蓝玫瑰（坦尼克白玫瑰，使用密西根碎冰蓝边缘喷淡蓝色工艺处理）',
+              Package: '蜜瓜/奶茶色欧雅纸4张、香槟色雪梨纸2张、浅粉色罗纹玫瑰金丝带2米'
+            },
+          ],
+        }
+      ],
       rosy: [
         {
           meigui1: [
@@ -351,6 +455,104 @@ export default {
         },
         {
           src: meigui1_4,
+        },
+        ],
+        meigui2: [
+        {
+          src: meigui2_1,
+        },
+        {
+          src: meigui2_2,
+        },
+        {
+          src: meigui2_3,
+        },
+        {
+          src: meigui2_4,
+        },
+        ],
+        meigui3: [
+        {
+          src: meigui3_1,
+        },
+        {
+          src: meigui3_2,
+        },
+        {
+          src: meigui3_3,
+        },
+        {
+          src: meigui3_4,
+        },
+        ],
+        meigui4: [
+        {
+          src: meigui4_1,
+        },
+        {
+          src: meigui4_2,
+        },
+        {
+          src: meigui4_3,
+        },
+        {
+          src: meigui4_4,
+        },
+        ],
+        meigui5: [
+        {
+          src: meigui5_1,
+        },
+        {
+          src: meigui5_2,
+        },
+        {
+          src: meigui5_3,
+        },
+        {
+          src: meigui5_4,
+        },
+        ],
+        meigui6: [
+        {
+          src: meigui6_1,
+        },
+        {
+          src: meigui6_2,
+        },
+        {
+          src: meigui6_3,
+        },
+        {
+          src: meigui6_4,
+        },
+        ],
+        meigui7: [
+        {
+          src: meigui7_1,
+        },
+        {
+          src: meigui7_2,
+        },
+        {
+          src: meigui7_3,
+        },
+        {
+          src: meigui7_4,
+        },
+        ],
+        meigui8: [
+        {
+          src: meigui8_1,
+        },
+        {
+          src: meigui8_2,
+        },
+        {
+          src: meigui8_3,
+        },
+        {
+          src: meigui8_4,
         },
         ]
         }
@@ -367,7 +569,17 @@ export default {
       this.$router.push({
         name: "details",
         query: {
-          mg1: JSON.stringify(this.rosy[0].meigui1)
+          mg1: JSON.stringify(this.rosy[0].meigui1),
+          info1: JSON.stringify(this.details[0].m1)
+        }
+      });
+    },
+    toTarget1() {
+      this.$router.push({
+        name: "details",
+        query: {
+          mg1: JSON.stringify(this.rosy[0].meigui2),
+          info1: JSON.stringify(this.details[0].m2)
         }
       });
     },

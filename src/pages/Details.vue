@@ -17,8 +17,7 @@
               <li
                 v-for="(item, index) in dmg1"
                 :key="index"
-                @mouseenter="showImg(index)"
-                
+                @mouseenter="showImg(index)"               
               >
                 <img :src="item.src" alt="" :class="{current: itemIndex == index}"/>
               </li>
@@ -26,26 +25,25 @@
           </div>
         </div>
         <div class="info">
-          <div class="bt" @click="mg()">百事合意/粉玫瑰香水百合plus</div>
+          <div class="bt" @click="mg()">{{this.info[0].name}}</div>
           <div class="bt1">
-            <span>[百合花开，幸福自来] </span>
-            戴安娜玫瑰19枝、白色香水百合2枝、尤加利叶10枝</div>
+            <span>{{this.info[0].summary}} </span></div>
           <div class="price">
-            <div class="sj">售价
-              <span>￥339</span>￥378
+            <div class="sj">{{this.info[0].price}}
+              <span>￥339</span>￥{{this.info[0].originPrice}}
             </div>
             <div class="ys">已售
-              <span>7888</span>件
+              <span>{{this.info[0].sale}}</span>件
             </div>
           </div>
           <div class="hy">花语 
-            <span>百合花开，幸福自来，手执玫瑰，挚爱此生。</span>
+            <span>{{this.info[0].hy}}</span>
             </div>
-            <div class="hy">花语 
-            <span>百合花开，幸福自来，手执玫瑰，挚爱此生。</span>
+            <div class="hy">材料 
+            <span>{{this.info[0].material}}</span>
             </div>
-            <div class="hy">花语 
-            <span>百合花开，幸福自来，手执玫瑰，挚爱此生。</span>
+            <div class="hy">包装 
+            <span>{{this.info[0].Package}}</span>
             </div>
             <div class="bu">
               <img src="@/assets/image/cart.png" alt="">
@@ -53,7 +51,7 @@
             </div>
             <div class="bu">
               <img src="@/assets/image/cart.png" alt="">
-              <span>立即购买</span>
+              <span @click="mg()">立即购买</span>
             </div>
         </div>
       </div>
@@ -89,12 +87,13 @@ export default {
   data() {
     return {
       dmg1: JSON.parse(this.$route.query.mg1),
+      info: JSON.parse(this.$route.query.info1),
       itemIndex: 0,
     };
   },
   methods: {
    mg (){
-    console.log(JSON.parse(this.$route.query.mg1));
+    console.log(this.info);
    },
     showImg(index) {
       this.itemIndex = index;
@@ -116,17 +115,19 @@ export default {
 }
 
 .product_info .img_left .top {
-  /* display: none; */
   width: 100%;
-  height: 500px;
+  height: 600px;
 }
 .top img {
   width: 100%;
   height: 100%;
 }
 .current {
-  outline: 3px #fff;
-  box-shadow:1px 1px #ccc;
+  outline: 5px #fff;
+  box-shadow:3px 3px #ccc;
+}
+.product_info .img_left .bottom {
+  height: 200px;
 }
 .product_info .img_left .bottom ul {
   display: flex;
@@ -135,15 +136,13 @@ export default {
   justify-content: space-around;
   align-items: center;
   margin-top: 5px;
-  margin-bottom: 30px;
 }
 .bottom ul li {
-  float: left;
   width: 20%;
-  height: 100px;
 }
 .bottom ul li img {
   width: 100%;
+  height: 130px;
 }
 .product_info .info {
   margin-left: 50px;
