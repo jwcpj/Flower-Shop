@@ -20,6 +20,7 @@
                 type="selection"
                 align="center"
                 width="50"
+                v-show="this.cartList.image == 'null'"
               ></el-table-column>
               <el-table-column label="商品图片" width="180">
                 <template slot-scope="scope">
@@ -206,7 +207,7 @@ import Footer from "@/components/Front/Footer.vue";
 import pubsub from "pubsub-js";
 import img1 from "@/assets/img/1.jpeg";
 import img2 from "@/assets/img/19.jpeg";
-
+import { nanoid } from 'nanoid';
 export default {
   name: "shopCart",
   components: {
@@ -229,6 +230,8 @@ export default {
       isMobile: false,
       // 是否全选
       isAllChecked: false,
+      receivedArray: [],
+      
     };
   },
   created() {
@@ -243,6 +246,10 @@ export default {
     window.onresize = function () {
       _this.resizeLayout();
     };
+  },
+
+  beforeDestroy(){
+    this.$bus.$off('list2')
   },
   methods: {
     toTarget() {
@@ -306,39 +313,32 @@ export default {
     initData() {
       let _this = this;
       _this.getList();
+      // const dmg = _this.$store.state.data;
+      // console.log(dmg[0].src);
     },
-mounted(){
-this.pubId = pubsub.subscribe('getList',this.getList)
-console.log(this.getList);
-},
+
     // 获取购物车列表
-    getList(msg,data) {
-      console.log(msg,data);
+    getList() {
       let _this = this;
+         const dmg = _this.$store.state.data;
+         const info = _this.$store.state.info;
+    console.log(dmg[0].src);
+    const id = nanoid();
       _this.cartList = [
         {
-          id: "2142423",
-          image: img1,
-          productName: "测试商品1",
+          id: id,
+          image: dmg[0].src,
+          productName: info[0].name,
           // 单价
-          price: 12,
+          price: info[0].price,
           // 购买数量
           num: 1,
           // 如果api返回的数据中没有类似checked这种判断是否选中的字段
           // 可以在获取收据后 初始化时遍历添加一遍
           checked: false,
         },
-        {
-          id: "2142423424",
-          image: img2,
-          productName: "测试商品2",
-          price: 32,
-          num: 2,
-          checked: false,
-        },
       ];
     },
-
     // 计算总价和总数量
     calTotalPrice() {
       let _this = this;

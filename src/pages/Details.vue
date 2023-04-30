@@ -29,8 +29,8 @@
           <div class="bt1">
             <span>{{this.info[0].summary}} </span></div>
           <div class="price">
-            <div class="sj">{{this.info[0].price}}
-              <span>￥339</span>￥{{this.info[0].originPrice}}
+            <div class="sj">售价
+              <span>￥{{this.info[0].price}}</span>￥{{this.info[0].originPrice}}
             </div>
             <div class="ys">已售
               <span>{{this.info[0].sale}}</span>件
@@ -77,7 +77,7 @@
 <script>
 import HomeHeader from "@/components/Front/HomeHeader.vue";
 import Footer from "@/components/Front/Footer.vue";
-import pubsub from "pubsub-js"
+// import pubsub from "pubsub-js"
 export default {
   name: "Detail",
   components: {
@@ -98,8 +98,9 @@ export default {
     showImg(index) {
       this.itemIndex = index;
     },
-    toTarget(){
-      pubsub.publish("getList",this.dmg1[0].src)
+    toTarget(){  
+      this.$store.commit('dmg',this.dmg1)
+      this.$store.commit('info',this.info)
     }
   },
 };
