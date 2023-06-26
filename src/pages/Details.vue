@@ -4,68 +4,41 @@
     <div class="product">
       <div class="product_info">
         <div class="img_left">
-          <div
-            class="top"
-            v-for="(item, index) in dmg1"
-            :key="index"
-            v-show="itemIndex == index"
-          >
-            <img :src="item.src" alt="" />
-          </div>
-          <div class="bottom">
-            <ul>
-              <li
-                v-for="(item, index) in dmg1"
-                :key="index"
-                @mouseenter="showImg(index)"               
-              >
-                <img :src="item.src" alt="" :class="{current: itemIndex == index}"/>
-              </li>
-            </ul>
+          <div class="top">
+            <img :src="this.info.product_img" alt="" />
           </div>
         </div>
         <div class="info">
-          <div class="bt" @click="mg()">{{this.info[0].name}}</div>
+          <div class="bt">{{ this.info.product_name }}</div>
           <div class="bt1">
-            <span>{{this.info[0].summary}} </span></div>
+            <span>{{ this.info.product_type }} </span>
+          </div>
           <div class="price">
-            <div class="sj">售价
-              <span>￥{{this.info[0].price}}</span>￥{{this.info[0].originPrice}}
+            <div class="sj">
+              售价
+              <span>￥{{ this.info.price }}</span>
             </div>
-            <div class="ys">已售
-              <span>{{this.info[0].sale}}</span>件
+            <div class="ys">
+              已售 <span>{{ this.info.sale }}</span
+              >件
             </div>
           </div>
-          <div class="hy">花语 
-            <span>{{this.info[0].hy}}</span>
-            </div>
-            <div class="hy">材料 
-            <span>{{this.info[0].material}}</span>
-            </div>
-            <div class="hy">包装 
-            <span>{{this.info[0].Package}}</span>
-            </div>
-            <div class="bu">
-              <img src="@/assets/image/cart.png" alt="">
-              <span @click="toTarget()">加入购物车</span>
-            </div>
-            <div class="bu">
-              <img src="@/assets/image/cart.png" alt="">
-              <span @click="mg()">立即购买</span>
-            </div>
-        </div>
-      </div>
-      <div class="img_info">
-        <div class="xq">商品详情</div>
-        <div class="img_left">
-          <div class="left" v-for="(item,index) in dmg1" :key="index">
-          <img :src="item.src" alt="">
-        </div>
-        </div>
-        <div class="img_right">
-          <div class="right" v-for="(item,index) in dmg1" :key="index">
-          <img :src="item.src" alt="">
-        </div>
+          <div class="hy">
+            花语
+            <span>{{ this.info.hy }}</span>
+          </div>
+          <div class="hy">
+            材料
+            <span>{{ this.info.cl }}</span>
+          </div>
+          <div class="bu">
+            <img src="@/assets/image/cart.png" alt="" />
+            <span @click="toCart()">加入购物车</span>
+          </div>
+          <div class="bu">
+            <img src="@/assets/image/cart.png" alt="" />
+            <span @click="toOrder">立即购买</span>
+          </div>
         </div>
       </div>
     </div>
@@ -77,7 +50,7 @@
 <script>
 import HomeHeader from "@/components/Front/HomeHeader.vue";
 import Footer from "@/components/Front/Footer.vue";
-// import pubsub from "pubsub-js"
+import { addCart } from "@/api";
 export default {
   name: "Detail",
   components: {
@@ -86,22 +59,19 @@ export default {
   },
   data() {
     return {
-      dmg1: JSON.parse(this.$route.query.mg1),
       info: JSON.parse(this.$route.query.info1),
       itemIndex: 0,
     };
   },
   methods: {
-   mg (){
-    console.log(this.info);
-   },
-    showImg(index) {
-      this.itemIndex = index;
+    toOrder() {
+      console.log(this.info);
+      this.$router.push("/settlement");
     },
-    toTarget(){  
-      this.$store.commit('dmg',this.dmg1)
-      this.$store.commit('info',this.info)
-    }
+    async toCart() {
+      let res = await addCart(this.info);
+      console.log(res);
+    },
   },
 };
 </script>
@@ -125,7 +95,7 @@ export default {
 }
 .current {
   outline: 5px #fff;
-  box-shadow:3px 3px #ccc;
+  box-shadow: 3px 3px #ccc;
 }
 .product_info .img_left .bottom {
   height: 200px;
@@ -163,9 +133,9 @@ export default {
   color: orange;
 }
 .info .price {
-  background-color: #ccc ;
-  opacity: .7;
-} 
+  background-color: #ccc;
+  opacity: 0.7;
+}
 .sj {
   font-size: 16px;
   padding: 15px 20px;

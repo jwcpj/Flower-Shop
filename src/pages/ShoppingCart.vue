@@ -22,27 +22,18 @@
                 width="50"
                 v-show="this.cartList.image == 'null'"
               ></el-table-column>
-              <el-table-column label="商品图片" width="180">
+              <el-table-column label="商品图片" prop="product_img" width="180">
                 <template slot-scope="scope">
                   <el-image
-                    :src="scope.row.image"
+                    :src="scope.row.product_img"
                     style="width: 120px; height: 120px"
                   >
-                    <div slot="placeholder" class="image-slot">
-                      Loading<span class="dot">...</span>
-                    </div>
-                    <div slot="error" class="image-slot">
-                      <el-image
-                        style="width: 120px; height: 120px"
-                        src="https://cube.elemecdn.com/e/fd/0fc7d20532fdaf769a25683617711png.png"
-                      ></el-image>
-                    </div>
                   </el-image>
                 </template>
               </el-table-column>
               <el-table-column
                 label="商品名称"
-                prop="productName"
+                prop="product_name"
               ></el-table-column>
               <el-table-column label="单价" prop="price"></el-table-column>
               <el-table-column label="数量" width="220">
@@ -66,7 +57,7 @@
                   <el-button
                     size="medium"
                     type="danger"
-                    v-on:click="delGood(scope.row.id)"
+                    v-on:click="delGood(scope.row.product_name)"
                     >删除</el-button
                   >
                 </template>
@@ -85,18 +76,21 @@
                   >
                 </div>
               </span>
-              <span class="all-del" v-show="isAllChecked">
+              <!-- <span class="all-del" v-show="isAllChecked">
                 <el-button type="danger" size="small" v-on:click="delAll"
                   >删除</el-button
                 >
-              </span>
+              </span> -->
             </div>
             <div class="cart-sum">
               <span class="pay-text">已选商品</span>
               <span class="total-text">合计：</span>
               <span class="total-symbol">{{ cartTotalPrice }}</span>
-              <div v-if="selectionData.length > 0" class="pay-btn-active"
-                @click="toTarget">
+              <div
+                v-if="selectionData.length > 0"
+                class="pay-btn-active"
+                @click="toTarget"
+              >
                 结算
               </div>
               <div v-else class="pay-btn-inactive">结算</div>
@@ -123,7 +117,7 @@
                     <div v-else></div>
                   </div>
                 </div>
-                <el-image :src="item.image">
+                <el-image :src="item.product_image">
                   <div slot="placeholder" class="image-slot">
                     Loading<span class="dot">...</span>
                   </div>
@@ -174,9 +168,6 @@
                 >全选</el-checkbox
               >
             </div>
-            <div class="del-text" v-show="isAllChecked" @click="delAll">
-              删除
-            </div>
           </div>
           <div class="rights">
             合计：
@@ -204,10 +195,10 @@
 <script>
 import HomeHeader from "@/components/Front/HomeHeader.vue";
 import Footer from "@/components/Front/Footer.vue";
-import pubsub from "pubsub-js";
-import img1 from "@/assets/img/1.jpeg";
-import img2 from "@/assets/img/19.jpeg";
-import { nanoid } from 'nanoid';
+import { addOrder } from "@/api";
+import { cartList1 } from "@/api";
+import { deleteCart } from "@/api";
+import { deleteAllCart } from "@/api";
 export default {
   name: "shopCart",
   components: {
@@ -231,7 +222,6 @@ export default {
       // 是否全选
       isAllChecked: false,
       receivedArray: [],
-      
     };
   },
   created() {
@@ -248,8 +238,8 @@ export default {
     };
   },
 
-  beforeDestroy(){
-    this.$bus.$off('list2')
+  beforeDestroy() {
+    this.$bus.$off("list2");
   },
   methods: {
     toTarget() {
@@ -312,32 +302,14 @@ export default {
     // 初始化数据
     initData() {
       let _this = this;
-      _this.getList();
+      _this.list();
       // const dmg = _this.$store.state.data;
       // console.log(dmg[0].src);
     },
-
-    // 获取购物车列表
-    getList() {
-      let _this = this;
-         const dmg = _this.$store.state.data;
-         const info = _this.$store.state.info;
-    console.log(dmg[0].src);
-    const id = nanoid();
-      _this.cartList = [
-        {
-          id: id,
-          image: dmg[0].src,
-          productName: info[0].name,
-          // 单价
-          price: info[0].price,
-          // 购买数量
-          num: 1,
-          // 如果api返回的数据中没有类似checked这种判断是否选中的字段
-          // 可以在获取收据后 初始化时遍历添加一遍
-          checked: false,
-        },
-      ];
+    async list() {
+      let res = await cartList1();
+      this.cartList = res.data;
+      console.log(this.cartList);
     },
     // 计算总价和总数量
     calTotalPrice() {
@@ -381,51 +353,19 @@ export default {
       _this.calTotalPrice();
     },
     // 	全部删除
-    delAll() {
-      let _this = this;
-      _this
-        .$confirm("确定要删除全部商品吗?", "提示", {
-          confirmButtonText: "确定",
-          cancelButtonText: "取消",
-          type: "warning",
-        })
-        .then(function () {
-          // 这里只是前端删除
-          _this.cartList = [];
-          _this.isAllChecked = false;
-          // 删除后需要重新获取数据刷新页面
-          //   _this.getList();
-        })
-        .catch((e) => {
-          console.log(e);
-        });
+    async delAll() {
+      let res = await deleteAllCart();
+      if (res.code == "10000") {
+        alert("删除成功！");
+      }
     },
     // 单个删除
-    delGood(id) {
-      let _this = this;
-      if (!id) {
-        _this.$message.error("商品有误，请刷新后重试");
-        return;
+    async delGood(name) {
+      const info = { product_name: name };
+      let res = await deleteCart(info);
+      if (res.code == "10000") {
+        this.list();
       }
-      _this
-        .$confirm("确定要删除此商品吗?", "提示", {
-          confirmButtonText: "确定",
-          cancelButtonText: "取消",
-          type: "warning",
-        })
-        .then(function () {
-          let goodIndex = 0;
-          _this.cartList.forEach((item, index) => {
-            if (item.id === id) {
-              goodIndex = index;
-            }
-          });
-          _this.cartList.splice(goodIndex, 1);
-          //   _this.getList();
-        })
-        .catch((e) => {
-          console.log(e);
-        });
     },
     // 全选
     checkAll() {

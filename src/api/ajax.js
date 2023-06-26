@@ -13,7 +13,7 @@ import 'nprogress/nprogress.css'
 NProgress.configure({ showSpinner: false })
 
 const service = axios.create({
-    baseURL: "/user", // 基础路径
+    baseURL: "/", // 基础路径
     timeout: 15000 // 连接请求超时时间
 })
 
@@ -41,4 +41,4 @@ service.interceptors.response.use((response) => {
     return Promise.reject(error)
 })
 
-export default service
+export default service 

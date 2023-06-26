@@ -3,9 +3,12 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "serve": "vue-cli-service serve --port 8090",
-    "build": "vue-cli-service build",
-    "lint": "vue-cli-service lint"
+    "lint": "vue-cli-service lint",
+    "serve-dev": "vue-cli-service serve --mode dev --port 8090",
+    "serve-prod": "vue-cli-service serve --mode prod",
+    "build-dev": "vue-cli-service build --mode dev",
+    "build-prod": "vue-cli-service build --mode prod"
+
   },
   "dependencies": {
     "axios": "^1.3.5",
@@ -14,9 +17,11 @@
     "nanoid": "^4.0.2",
     "nprogress": "^0.2.0",
     "pubsub-js": "^1.9.4",
+    "qs": "^6.11.1",
     "vue": "^2.6.14",
     "vuex": "^3.6.2",
-    "vuex-persistedstate": "^4.1.0"
+    "vuex-persistedstate": "^4.1.0",
+    "zlib": "^1.0.5"
   },
   "devDependencies": {
     "@babel/core": "^7.12.16",

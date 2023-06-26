@@ -4,8 +4,8 @@
     <div class="login">
       <div class="login_content">
         <p>
-          <span>欢迎登录鲜花网</span>
-          <router-link to="logon"><b>还没有账号？</b>用户秒注册</router-link>
+          <span>欢迎注册鲜花网</span
+          ><router-link to="login"><b>已有账号？</b>管理员登录</router-link>
         </p>
         <dl>
           <dt>用户名</dt>
@@ -22,8 +22,8 @@
             />
           </dd>
         </dl>
-        <button type="submit" @click="submit()">登 录</button>
-        <router-link to="/adminlogin">管理员登录</router-link>
+        <button type="submit" @click="submit()">注 册</button>
+        <!-- <router-link to="/login">用户注册</router-link> -->
       </div>
     </div>
     <Footer></Footer>
@@ -33,9 +33,10 @@
 <script>
 import HomeHeader from "@/components/Front/HomeHeader.vue";
 import Footer from "@/components/Front/Footer.vue";
-import { loginUser } from "@/api";
+import { registUser } from "@/api";
+
 export default {
-  name: "Login",
+  name: "AdminRegist",
   components: {
     HomeHeader,
     Footer,
@@ -50,24 +51,17 @@ export default {
   },
   methods: {
     async submit() {
-      let res = await loginUser(this.userInfo);
-      let user = res.code;
-      console.log(res.data);
-      console.log(user);
-       localStorage.setItem("token",res.msg)
-      if (user == "10000") {
-        localStorage.setItem("user", JSON.stringify(user));
-      }
-      if (res.code == "10000") {
+      let res = await registUser(this.userInfo);
+      if (res.code == "10001") {
+        alert(res.msg);
+      } else if (res.code == "10000") {
         this.$router.push({
-          name: "home",
-          // params: {
-          //   username: this.username,
-          //   password: this.password,
-          // },
+          name: "adminlogin",
+          params: {
+            username: this.username,
+            password: this.password,
+          },
         });
-      } else {
-        alert(res.msg + "请重新登录！");
       }
     },
   },
@@ -76,8 +70,7 @@ export default {
 
 <style scoped>
 .main {
-  max-width: 100%;
-  height: auto;
+  width: 100%;
   border: 1px solid #ccc;
   border-left: 0;
   border-right: 0;
@@ -87,7 +80,7 @@ export default {
   margin: 42px auto;
   display: flex;
   justify-content: space-between;
-  background-image: url(@/assets/img/banner_elder.png);
+  background-image: url(@/assets/img/banner_lover.png);
 }
 .login .login_content {
   margin-top: 3vw;

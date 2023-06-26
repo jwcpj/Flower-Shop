@@ -3,22 +3,14 @@
     <div class="top_nav">
       <div class="container flex">
         <span class="welcome"> 鲜花礼品网 欢迎您 </span>
+
         <router-link to="/" class="order">首页</router-link>
-        <router-link to="/order" class="order">我的订单</router-link>
-        <span>鲜花网 为您提供优质购物体验</span>
-      </div>
-    </div>
-    <div class="container">
-      <div class="logo_line flex">
-        <router-link to="/" class="logo"></router-link>
-        <div class="home_input">
-          <input type="text" />
-          <button class="search_button">搜索</button>
-        </div>
         <div class="gouwu" @click="toTarget">
           <i class="el-icon-shopping-cart-full"></i>
           <span>购物车</span>
         </div>
+        <span>鲜花网 为您提供优质购物体验</span>
+        <router-link to="/login" class="order">退出登录</router-link>
       </div>
     </div>
   </div>
@@ -43,6 +35,7 @@ export default {
   line-height: 40px;
   font-size: 14px;
   color: white;
+  margin-bottom: 40px;
 }
 .login,
 .register {

@@ -5,7 +5,7 @@
       <div class="login_content">
         <p>
           <span>欢迎注册鲜花网</span
-          ><router-link to="login"><b>已有账号？</b>快速登录</router-link>
+          ><router-link to="login"><b>已有账号？</b>用户登录</router-link>
         </p>
         <dl>
           <dt>用户名</dt>
@@ -23,6 +23,7 @@
           </dd>
         </dl>
         <button type="submit" @click="submit()">注 册</button>
+        <router-link to="/adminregist">管理员注册</router-link>
       </div>
     </div>
     <Footer></Footer>
@@ -51,7 +52,9 @@ export default {
   methods: {
     async submit() {
       let res = await registUser(this.userInfo);
-      if (res.code == "10000") {
+      if (res.code == "10001") {
+        alert(res.msg);
+      } else if (res.code == "10000") {
         this.$router.push({
           name: "login",
           params: {

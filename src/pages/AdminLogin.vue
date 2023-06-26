@@ -5,7 +5,7 @@
       <div class="login_content">
         <p>
           <span>欢迎登录鲜花网</span>
-          <router-link to="logon"><b>还没有账号？</b>用户秒注册</router-link>
+          <router-link to="/adminregist"><b>还没有账号？</b>管理员秒注册</router-link>
         </p>
         <dl>
           <dt>用户名</dt>
@@ -23,9 +23,9 @@
           </dd>
         </dl>
         <button type="submit" @click="submit()">登 录</button>
-        <router-link to="/adminlogin">管理员登录</router-link>
+        <router-link to="/login">用户登录</router-link>
       </div>
-    </div>
+    </div>in
     <Footer></Footer>
   </div>
 </template>
@@ -35,7 +35,7 @@ import HomeHeader from "@/components/Front/HomeHeader.vue";
 import Footer from "@/components/Front/Footer.vue";
 import { loginUser } from "@/api";
 export default {
-  name: "Login",
+  name: "AdminLogin",
   components: {
     HomeHeader,
     Footer,
@@ -54,17 +54,13 @@ export default {
       let user = res.code;
       console.log(res.data);
       console.log(user);
-       localStorage.setItem("token",res.msg)
+         localStorage.setItem("token",res.msg)
       if (user == "10000") {
         localStorage.setItem("user", JSON.stringify(user));
       }
       if (res.code == "10000") {
         this.$router.push({
-          name: "home",
-          // params: {
-          //   username: this.username,
-          //   password: this.password,
-          // },
+          name: "adminhome",
         });
       } else {
         alert(res.msg + "请重新登录！");

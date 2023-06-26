@@ -4,9 +4,9 @@
     <div class="js">
       <h1>恭喜您以完成商品结算</h1>
       <div class="bu">
-              <img src="@/assets/image/cart.png" alt="">
-              <span @click="toTarget()">查看订单</span>
-            </div>
+        <img src="@/assets/image/cart.png" alt="" />
+        <span><router-link to="/">返回首页</router-link></span>
+      </div>
     </div>
     <Footer></Footer>
   </div>
@@ -22,28 +22,26 @@ export default {
     HomeHeader,
     Footer,
   },
-  data(){
-    return {
-      dmg: this.$store.state.data,
-      info:  this.$store.state.info
-    }
+  data() {
+    return {};
   },
   methods: {
-    toTarget(){
-        this.$router.push({
-        name: "order",
-        query: {
-          mg1: JSON.stringify(this.dmg),
-          info1: JSON.stringify(this.info),
-        },
+    toTarget() {
+      this.$router.push({
+        name: "/",
       });
-    }
-  }
+    },
+  },
 };
 </script>
 
 <style scoped>
 .js {
+  height: 200px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
   text-align: center;
 }
 .js h1 {
@@ -70,10 +68,11 @@ export default {
 .bu span {
   position: absolute;
   top: 10px;
-  left: 50%;
+  left: 52%;
   transform: translate(-50%);
   color: rgb(218, 137, 51);
   font-weight: 700;
   font-size: 20px;
   text-align: center;
-}</style>
+}
+</style>

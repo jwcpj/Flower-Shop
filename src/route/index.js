@@ -7,7 +7,46 @@ import ShoppingCart from "@/pages/ShoppingCart.vue";
 import Settlement from "@/pages/Settlement.vue";
 import Details from "@/pages/Details.vue"
 import Order from "@/pages/Order.vue"
+import AdminLogin from "@/pages/AdminLogin"
+import AdminRegist from "@/pages/AdminRegist"
+import AdminHome from "@/pages/AdminHome.vue"
+import AddProduct from "@/pages/AddProduct.vue"
+import UpdateProduct from "@/pages/UpdateProduct.vue"
 const routes = [
+  {
+    name: 'adminregist',
+    path: "/adminregist",
+    component: AdminRegist,
+  },
+  {
+    name: 'adminhome',
+    path: "/adminhome",
+    component: AdminHome,
+    meta: {
+      requiresAuth: true
+    }
+  },
+  {
+    name: 'addproduct',
+    path: "/addproduct",
+    component: AddProduct,
+    meta: {
+      requiresAuth: true
+    }
+  },
+  {
+    name: 'updateproduct',
+    path: "/updateproduct",
+    component: UpdateProduct,
+    meta: {
+      requiresAuth: true
+    }
+  },
+  {
+    name: 'adminlogin',
+    path: "/adminlogin",
+    component: AdminLogin,
+  },
   {
     name: 'home',
     path: "/",
